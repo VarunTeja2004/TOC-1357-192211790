@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+bool isAcceptedDFA(const char* input) {
+    int state = 0; 
+
+    for (int i = 0; i < strlen(input); i++) {
+        char c = input[i];
+        switch (state) {
+            case 0: 
+                if (c == 'a') {
+                    state = 1; 
+                } else {
+                    state = 0; 
+                }
+                break;
+
+            case 1: 
+                if (c == 'a') {
+                    state = 2;
+                } else {
+                    state = 2; 
+                }
+                break;
+
+            case 2: 
+                if (c == 'a') {
+                    state = 3; 
+                } else {
+                    state = 2;
+                }
+                break;
+
+            case 3: 
+                if (c == 'a') {
+                    state = 3; 
+                } else {
+                    state = 2; 
+                }
+                break;
+        }
+    }
+
+    
+    return (state == 3);
+}
+
+int main() {
+    char input[100];
+
+    printf("Enter a string (only characters 'a' and 'b'): ");
+    scanf("%s", input);
+
+    if (isAcceptedDFA(input)) {
+        printf("The string '%s' is accepted by the DFA.\n", input);
+    } else {
+        printf("The string '%s' is not accepted by the DFA.\n", input);
+    }
+
+    return 0;
+}
