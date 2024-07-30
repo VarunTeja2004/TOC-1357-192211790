@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+
+bool belongsToCFG(const char* str)
+ {
+    
+    int len = strlen(str);
+    
+    if (len < 3) 
+	{
+        return false;
+    }
+    const char *pos = strstr(str, "101");
+    if (!pos) {
+        return false; 
+    }
+
+    for (const char *ptr = str; ptr < pos; ptr++) {
+        if (*ptr != '0' && *ptr != '1') {
+            return false; 
+        }
+    }
+    
+    for (const char *ptr = pos + 3; ptr < str + len; ptr++) {
+        if (*ptr != '0' && *ptr != '1') {
+            return false; 
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a string to check: ");
+    scanf("%s", str);
+
+    if (belongsToCFG(str)) {
+        printf("The string belongs to the language defined by the CFG.\n");
+    } else {
+        printf("The string does NOT belong to the language defined by the CFG.\n");
+    }
+
+    return 0;
+}
