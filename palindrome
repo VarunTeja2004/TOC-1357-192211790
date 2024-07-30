@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool isPalindrome(const char* str) {
+    int left = 0;
+    int right = strlen(str) - 1;
+
+    while (left < right) {
+        if (str[left] != str[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+bool belongsToCFG(const char* str) {
+    int len = strlen(str);
+
+    if (len == 0) {
+        return true; 
+    }
+
+    for (int i = 0; i < len; i++) {
+        if (str[i] != '0' && str[i] != '1') {
+            return false; 
+        }
+    }
+
+    return isPalindrome(str);
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a string to check: ");
+    scanf("%s", str);
+
+    if (belongsToCFG(str)) {
+        printf("The string belongs to the language defined by the CFG.\n");
+    } else {
+        printf("The string does NOT belong to the language defined by the CFG.\n");
+    }
+
+    return 0;
+}
