@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+int isValidString(const char *str) {
+    int length = strlen(str);
+    if (length < 2 || str[0] != '0' || str[length - 1] != '1') {
+        return 0; 
+    }
+
+    for (int i = 1; i < length - 1; i++) {
+        if (str[i] != '0' && str[i] != '1') {
+            return 0; 
+        }
+    }
+
+    return 1; 
+}
+
+int main() {
+    char input[100];
+
+    printf("Enter a string to check if it belongs to the CFG (S -> 0A1, A -> 0A | 1A | ε): ");
+    scanf("%s", input);
+
+    if (isValidString(input)) {
+        printf("The string '%s' belongs to the language defined by the CFG.\n", input);
+    } else {
+        printf("The string '%s' does not belong to the language defined by the CFG.\n", input);
+    }
+
+    return 0;
+}
