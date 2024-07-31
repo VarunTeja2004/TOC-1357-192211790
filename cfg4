@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+int isPalindrome(const char *str, int start, int end) {
+    
+    if (start >= end) {
+        return 1; 
+    }
+    if (str[start] != str[end]) {
+        return 0; 
+    }
+
+    return isPalindrome(str, start + 1, end - 1);
+}
+
+int belongsToCFG(const char *str) {
+    int length = strlen(str);
+ 
+    if (length == 0) {
+        return 1; 
+    }
+    if (length == 1 && (str[0] == '0' || str[0] == '1')) {
+        return 1; 
+    }
+    return isPalindrome(str, 0, length - 1);
+}
+
+int main() {
+    char input[100];
+
+    printf("Enter a string to check if it belongs to the CFG (S → 0S0 | 1S1 | 0 | 1 | ε): ");
+    scanf("%s", input);
+
+    if (belongsToCFG(input)) {
+        printf("The string '%s' belongs to the language defined by the CFG.\n", input);
+    } else {
+        printf("The string '%s' does not belong to the language defined by the CFG.\n", input);
+    }
+
+    return 0;
+}
