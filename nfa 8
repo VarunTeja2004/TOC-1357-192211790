@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+int isAccepted(const char *str) {
+    int state = 0; 
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        char currentChar = str[i];
+
+        switch (state) {
+            case 0: 
+                if (currentChar == 'b') {
+                    state = 1; 
+                } else {
+                    return 0; 
+                }
+                break;
+
+            case 1: 
+                if (currentChar == 'a') {
+                    state = 2; 
+                } else if (currentChar == 'b') {
+                    state = 1;
+                } else {
+                    return 0; 
+                }
+                break;
+
+            case 2: 
+                if (currentChar == 'a') {
+                    state = 2;
+                } else if (currentChar == 'b') {
+                    state = 1;
+                } else {
+                    return 0; 
+                }
+                break;
+
+            default:
+                return 0; 
+        }
+    }
+    return (state == 2);
+}
+
+int main() {
+    char input[100];
+
+    printf("Enter a string to check if it belongs to the language (starts with 'b' and ends with 'a'): ");
+    scanf("%s", input);
+
+    if (isAccepted(input)) {
+        printf("The string '%s' is accepted by the NFA.\n", input);
+    } else {
+        printf("The string '%s' is rejected by the NFA.\n", input);
+    }
+
+    return 0;
+}
